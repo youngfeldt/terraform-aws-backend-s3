@@ -18,7 +18,7 @@ Include in main.tf:
 
 ```
 module s3_backend {
-    source = "F1ERCE/backend-s3/aws"  
+    source = "youngfeldt/backend-s3/aws"  
     version = ">= 1.0.0"
     create_s3_bucket = < true | false >
     tf_backend_s3_bucket = "${var.s3_bucket_name}"  
@@ -30,7 +30,7 @@ Example: *with hardcoded values*
 
 ```
 module s3_backend {
-	source = "F1ERCE/backend-s3/aws"
+	source = "youngfeldt/backend-s3/aws"
 	version = ">= 1.0.0"  
 	
 	create_s3_bucket = false
