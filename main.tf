@@ -7,26 +7,29 @@ data "aws_caller_identity" "current" {}
 
 # S3 Bucket to hold state.
 resource "aws_s3_bucket" "s3_backend" {
-    count = "${var.create_s3_bucket}"
-    acl = "private"
-    bucket = "${var.tf_backend_s3_bucket}"
-    region = "${data.aws_region.current.name}"
-    versioning {
-      enabled = true
-    }
+  count  = "${var.create_s3_bucket}"
+  acl    = "private"
+  bucket = "${var.tf_backend_s3_bucket}"
+  region = "${data.aws_region.current.name}"
 
-    lifecycle {
-      prevent_destroy = true
-    }
-    tags {
-      Name = "TF remote state test"
-      Owner = "${data.aws_caller_identity.current.user_id}"
-      Terraform = "true"
-    }
+  versioning {
+    enabled = true
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  tags {
+    Name      = "TF remote state test"
+    Owner     = "${data.aws_caller_identity.current.user_id}"
+    Terraform = "true"
+  }
 }
 
 # DynamoDB table to lock state during applies
 resource "aws_dynamodb_table" "terraform_state_lock" {
+  count          = "${var.create_dynamodb_table}"
   name           = "${var.dynamodb_state_lock_table}"
   read_capacity  = 20
   write_capacity = 20
@@ -36,6 +39,7 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     name = "LockID"
     type = "S"
   }
+
   tags {
     Purpose = "Terraform state lock for state in ${var.tf_backend_s3_bucket}:${var.s3_key} "
   }
@@ -47,7 +51,7 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
    to auto-copy state up to s3
 */
 resource "local_file" "terraform_tf" {
-    content     = <<EOF
+  content = <<EOF
     terraform {
       backend "s3" {
         bucket         = "${var.tf_backend_s3_bucket}"
@@ -58,7 +62,6 @@ resource "local_file" "terraform_tf" {
       }
     }
     EOF
-    filename = "${path.root}/terraform.tf"
+
+  filename = "${path.root}/terraform.tf"
 }
-
-
