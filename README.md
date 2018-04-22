@@ -6,8 +6,8 @@
 :----------------------|:--------:| :----------------------
 backend_dynamodb_lock_table  | string | Name of dynamoDB table to use for state locking
 backend_s3_bucket| string  | Name of bucket housing terraform state files
-create_dynamodb_lock_table | boolean | create dynamodb table for state locking ? { default = false }   # Setting true will cause table to be created.
-create_s3_bucket   | boolean | create s3 bucket ? { default = false } # Setting true will cause bucket to be created.    
+create_dynamodb_lock_table | boolean | { default = fase } create dynamodb table for state locking ? # Setting true will cause table to be created.
+create_s3_bucket   | boolean | { default = fase } create s3 bucket ? # Setting true will cause bucket to be created.    
 s3\_key             | string  | name of key where state is kept.  (ie "dev/tf.state", or "prod/tf.state", "dev/data-tier/tf.state", etc..)
 
 ## Usage
