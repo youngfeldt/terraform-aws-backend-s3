@@ -9,7 +9,7 @@ data "aws_caller_identity" "current" {}
 resource "aws_s3_bucket" "s3_backend" {
   count  = "${var.create_s3_bucket}"
   acl    = "private"
-  bucket = "${var.tf_backend_s3_bucket}"
+  bucket = "${var.backend_s3_bucket}"
   region = "${data.aws_region.current.name}"
 
   versioning {
@@ -29,8 +29,8 @@ resource "aws_s3_bucket" "s3_backend" {
 
 # DynamoDB table to lock state during applies
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  count          = "${var.create_dynamodb_table}"
-  name           = "${var.tf_backend_dynamodb_state_lock_table}"
+  count          = "${var.create_dynamodb_lock_table}"
+  name           = "${var.backend_dynamodb_lock_table}"
   read_capacity  = 20
   write_capacity = 20
   hash_key       = "LockID"
@@ -54,11 +54,11 @@ resource "local_file" "terraform_tf" {
   content = <<EOF
     terraform {
       backend "s3" {
-        bucket         = "${var.tf_backend_s3_bucket}"
+        bucket         = "${var.backend_s3_bucket}"
         key            = "${var.s3_key}"
         region         = "${data.aws_region.current.name}"
         encrypt        = false
-        dynamodb_table = "${var.tf_backend_dynamodb_state_lock_table}"
+        dynamodb_table = "${var.backend_dynamodb_lock_table}"
       }
     }
     EOF
