@@ -50,9 +50,9 @@ module s3_backend {
   **terraform plan**                  | As usual..  
   **terraform apply \-auto\-approve** | -auto-approve to avoid prompt about creating resources  
   **terraform init -force-copy**	     | Transition state to backend use flag *-force-copy* to avoid prompt to copy existing local state to backend.  
+    
 
-
- 
+    
 #### To revert to local terraform state:
 1. Comment out the backend module
 2. Run **terraform init** 
