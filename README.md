@@ -1,4 +1,5 @@
-# Module to create terraform remote backend in S3 with state locking
+# 
+Terraform S3 backend with state locking
 
 ## Inputs
 
@@ -34,11 +35,11 @@ Example: *with hardcoded values*
 module s3_backend {
 	source  = "youngfeldt/backend-s3/aws"
 	version = ">= 1.0.0"
-    create_dynamodb_lock_table = false
-	create_s3_bucket           = false
-	tf_backend_s3_bucket       = "my-uniq-terrraform-state-bucket-name"
-	dynamodb_state_lock_table  = "backend_tf_lock"
-	s3_key                     = "dev/frontend"
+	backend_s3_bucket           = "my-uniq-terrraform-state-bucket-name"
+	backend_dynamodb_lock_table = "backend_tf_lock"
+    create_dynamodb_lock_table  = false
+	create_s3_bucket            = false
+	s3_key                      = "dev/frontend"
 }
 ```
 
@@ -50,9 +51,8 @@ module s3_backend {
   **terraform plan**                  | As usual..  
   **terraform apply \-auto\-approve** | -auto-approve to avoid prompt about creating resources  
   **terraform init -force-copy**	     | Transition state to backend use flag *-force-copy* to avoid prompt to copy existing local state to backend.  
-    
+.
 
-    
 #### To revert to local terraform state:
 1. Comment out the backend module
 2. Run **terraform init** 

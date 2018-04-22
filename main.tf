@@ -41,7 +41,7 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
   }
 
   tags {
-    Purpose = "Terraform state lock for state in ${var.tf_backend_s3_bucket}:${var.s3_key} "
+    Purpose = "Terraform state lock for state in ${var.backend_s3_bucket}:${var.s3_key} "
   }
 }
 

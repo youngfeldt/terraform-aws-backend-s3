@@ -1,11 +1,7 @@
-## Data Section ##
 data "aws_region" "current" {
   current = true
 }
 
-## Variable Section ##
-# Backend store in S3
-# Backend dynamoDB lock table
 variable "backend_dynamodb_lock_table" {
   description = "table to hold state lock when updating.  You should have a distinct one for each separate TF state."
 }
@@ -27,6 +23,3 @@ variable "create_s3_bucket" {
 variable "s3_key" {
   description = "Path to your state.  Examples: dev/tf.state, prod/tf.state, dev/frontend/tf.state, dev/db-tier.tf, etc.."
 }
-
-# variable "s3_region" { default = "${data.aws_region.current.name}"}
-
