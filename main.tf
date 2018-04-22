@@ -30,7 +30,7 @@ resource "aws_s3_bucket" "s3_backend" {
 # DynamoDB table to lock state during applies
 resource "aws_dynamodb_table" "terraform_state_lock" {
   count          = "${var.create_dynamodb_table}"
-  name           = "${var.dynamodb_state_lock_table}"
+  name           = "${var.tf_backend_dynamodb_state_lock_table}"
   read_capacity  = 20
   write_capacity = 20
   hash_key       = "LockID"
@@ -58,7 +58,7 @@ resource "local_file" "terraform_tf" {
         key            = "${var.s3_key}"
         region         = "${data.aws_region.current.name}"
         encrypt        = false
-        dynamodb_table = "${var.dynamodb_state_lock_table}"
+        dynamodb_table = "${var.tf_backend_dynamodb_state_lock_table}"
       }
     }
     EOF
