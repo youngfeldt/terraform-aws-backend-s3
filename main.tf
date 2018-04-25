@@ -22,7 +22,6 @@ resource "aws_s3_bucket" "s3_backend" {
 
   tags {
     Name      = "TF remote state test"
-    Owner     = "${data.aws_caller_identity.current.user_id}"
     Terraform = "true"
   }
 }

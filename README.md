@@ -58,4 +58,5 @@ module s3_backend {
 2. Run **terraform init** 
 3. Answer "yes" to copying state back from S3.
 
- 
+## Todo:
+* Implement option for bucket encryption

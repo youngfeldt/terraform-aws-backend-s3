@@ -3,7 +3,7 @@ data "aws_region" "current" {
 }
 
 variable "backend_dynamodb_lock_table" {
-  description = "table to hold state lock when updating.  You should have a distinct one for each separate TF state."
+  description = "table to hold state lock when updating.  You may want a distinct one for each separate TF state."
 }
 
 variable "backend_s3_bucket" {
@@ -18,6 +18,16 @@ variable "create_dynamodb_lock_table" {
 variable "create_s3_bucket" {
   default     = false
   description = "Boolean.  If you have an S3 bucket already, use that one, else make this true and one will be created"
+}
+
+variable "use_bucket_encryption" {
+  default     = false
+  description = "Boolean.  Encrypt bucket with account default CMK"
+}
+
+variable "use_bucket_versioning" {
+  default     = true
+  description = "Boolean.  Leave true for safety, or set to false and role the dice on your fate."
 }
 
 variable "s3_key" {
