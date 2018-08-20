@@ -30,8 +30,8 @@ resource "aws_s3_bucket" "s3_backend" {
 resource "aws_dynamodb_table" "terraform_state_lock" {
   count          = "${var.create_dynamodb_lock_table}"
   name           = "${var.backend_dynamodb_lock_table}"
-  read_capacity  = 20
-  write_capacity = 20
+  read_capacity  = 2
+  write_capacity = 2
   hash_key       = "LockID"
 
   attribute {
