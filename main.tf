@@ -10,7 +10,6 @@ resource "aws_s3_bucket" "s3_backend" {
   count  = "${var.create_s3_bucket}"
   acl    = "private"
   bucket = "${var.backend_s3_bucket}"
-  region = "${data.aws_region.current.name}"
 
   versioning {
     enabled = true
