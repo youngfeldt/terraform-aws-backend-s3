@@ -54,6 +54,7 @@ resource "local_file" "terraform_tf" {
     terraform {
       backend "s3" {
         bucket         = "${var.backend_s3_bucket}"
+        acl            = "${var.acl}"
         key            = "${var.s3_key}"
         region         = "${data.aws_region.current.name}"
         encrypt        = false

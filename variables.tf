@@ -10,6 +10,14 @@ variable "backend_s3_bucket" {
   description = "Name of S3 bucket prepared to hold your terraform state(s)"
 }
 
+variable "acl" {
+  description = ["Canned ACL applied to bucket. Defaults to full access by bucket owner.",
+                 "More details found here"
+                ]
+  default     = "bucket-owner-full-control"
+}
+
+
 variable "create_dynamodb_lock_table" {
   default     = false
   description = "Boolean:  If you have a dynamoDB table already, use that one, else make this true and one will be created"
