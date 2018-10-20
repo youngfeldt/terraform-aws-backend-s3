@@ -1,6 +1,4 @@
-data "aws_region" "current" {
-  current = true
-}
+data "aws_region" "current" { }
 
 variable "backend_dynamodb_lock_table" {
   description = "table to hold state lock when updating.  You may want a distinct one for each separate TF state."
