@@ -11,9 +11,7 @@ variable "backend_s3_bucket" {
 }
 
 variable "acl" {
-  description = ["Canned ACL applied to bucket. Defaults to full access by bucket owner.",
-                 "More details found here"
-                ]
+  description = "Canned ACL applied to bucket. https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl"
   default     = "bucket-owner-full-control"
 }
 
