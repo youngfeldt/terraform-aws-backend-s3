@@ -1,6 +1,4 @@
-data "aws_region" "current" {
-  current = true
-}
+data "aws_region" "current" { }
 
 variable "backend_dynamodb_lock_table" {
   description = "table to hold state lock when updating.  You may want a distinct one for each separate TF state."
@@ -11,9 +9,7 @@ variable "backend_s3_bucket" {
 }
 
 variable "acl" {
-  description = ["Canned ACL applied to bucket. Defaults to full access by bucket owner.",
-                 "More details found here"
-                ]
+  description = "Canned ACL applied to bucket. https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl"
   default     = "bucket-owner-full-control"
 }
 
