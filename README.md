@@ -1,6 +1,8 @@
 # 
 Terraform S3 backend with state locking
 
+# NOTE: This module works with Terraform Versions < 0.11.15
+
 ## Inputs
 
  Variable               | Type    |  Purpose          
